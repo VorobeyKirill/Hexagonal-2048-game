@@ -1,0 +1,61 @@
+@import "../../variables.scss";
+
+.settings-container {
+    background-color: $primary-color;
+    width: 600px;
+    height: 400px;
+    border-radius: 10px;
+    margin: 0 auto;
+    border: 1px solid $secondary-color;
+    padding: 20px;
+}
+
+.settings-form__label {
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.settings-form__input--text, .settings-form__input--range {
+    display: block;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.settings-form__input--text {
+    font-size: 1.2rem;
+    background-color: transparent;
+    border: 0;
+    border-bottom: 1px solid $secondary-color;
+}
+
+.settings-form-examples {
+    display: block;
+    margin-bottom: 30px;
+    opacity: 0.8;
+    font-size: 0.8rem;
+
+    .examples__option {
+        cursor: pointer;
+        text-decoration: underline;
+        text-decoration-style: dashed;
+        text-decoration-thickness: 1px;
+        font-style: italic;
+    }
+}
+
+.settings-form__button {
+    display: block;
+    margin: 50px auto;
+    width: 100px;
+    height: 40px;
+    background-color: $secondary-color;
+    color: $text-light;
+    font-size: 1.4rem;
+    border-radius: 10px;
+    border: 0;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $secondary-color-dark;
+    }
+}
