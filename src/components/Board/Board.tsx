@@ -65,9 +65,9 @@ export const Board: FC<BoardProps> = ({ radius, hostname, port }) => {
                 ))}
 
             </div>
-            <p className="">
+            <p className="game-status-container">
                 Game Status:&nbsp;
-                <span data-status={gameStatus}>{gameStatus}</span>
+                <span className="game-status-container__status" data-status={gameStatus}>{gameStatus}</span>
             </p>
         </>
     );

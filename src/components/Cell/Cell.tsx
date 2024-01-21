@@ -1,6 +1,8 @@
 import { FC } from "react";
+import { CELL_BORDER_WIDTH } from "../../constants";
 
 import "./Cell.scss";
+import { useScale } from "../../hooks/useScale";
 
 interface CellProps {
     cellData: {
@@ -16,11 +18,13 @@ interface CellProps {
 export const Cell: FC<CellProps> = ({ cellData, size, boardRadius }) => {
     const {x, y, z, value } = cellData;
 
+    const scaleValue = useScale(value);
+
     const cellWidth = size * 2;
     const cellHeight = size * Math.sqrt(3);
 
-    const topOffset = size * Math.sqrt(3) * -(x / 2 + y) + (boardRadius - 1) * size * Math.sqrt(3);
-    const leftOffset = size * 3 / 2 * x + Math.sqrt(3) * (boardRadius - 1) * size * Math.sqrt(3) / 2 - 8 * x;
+    const leftOffset = size * 1.5 * x + Math.sqrt(3) * (boardRadius - 1) * cellHeight / 2 - CELL_BORDER_WIDTH * x;
+    const topOffset = -cellHeight / 2 * (1 + x + 2 * y) + CELL_BORDER_WIDTH * y + CELL_BORDER_WIDTH * x / Math.sqrt(3) + boardRadius * cellHeight * 1.5 / Math.sqrt(3);
 
     return (
         <div
@@ -36,7 +40,19 @@ export const Cell: FC<CellProps> = ({ cellData, size, boardRadius }) => {
             data-z={z}
             data-value={value}
         >
-            {!!value && <span>{value}</span>}
+            <div
+                className="cell__tile"
+                style={{
+                    width: `${cellWidth - CELL_BORDER_WIDTH * 4}px`,
+                    height: `${cellHeight - CELL_BORDER_WIDTH * 4}px`,
+                    top: `${CELL_BORDER_WIDTH * 2}px`,
+                    left: `${CELL_BORDER_WIDTH * 2}px`,
+                    transform: `scale(${scaleValue})`
+                }}
+                data-cell-value={value}
+            >
+                {!!value && <span>{value}</span>}
+            </div>
         </div>
     );
 }

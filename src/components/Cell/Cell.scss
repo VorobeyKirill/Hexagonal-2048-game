@@ -1,13 +1,66 @@
+@import "../../variables.scss";
+
 .cell {
     position: absolute;
+
+    background: $primary-color;
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+}
+
+.cell__tile {
+    position: absolute;
+
+    background: $tile-color-0;
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+
+    font-size: 1.7rem;
+    font-weight: 700;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 200 174' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 86.836L.65 84.371a5 5 0 00.028 4.979L5 86.836zM52.325 168.2l-4.322 2.514a5 5 0 004.322 2.486v-5zM51.371 5V0a5 5 0 00-4.35 2.535L51.37 5zm97.386 163.2v5c1.794 0 3.45-.961 4.34-2.518l-4.34-2.482zM147.802 5l4.337-2.487A5 5 0 00147.802 0v5zM195 87.31l4.341 2.48c.88-1.539.879-3.43-.004-4.968L195 87.31zM.678 89.35l47.325 81.364 8.645-5.028L9.322 84.322.678 89.35zm8.672-.05L55.72 7.466l-8.7-4.93L.65 84.371l8.7 4.93zm42.975 83.9h96.432v-10H52.326v10zM51.371 10h96.431V0H51.371v10zm139.288 74.828l-46.243 80.89 8.681 4.964 46.244-80.891-8.682-4.963zm8.678-.006l-47.198-82.31-8.675 4.975 47.199 82.31 8.674-4.975z' fill='%23B5A89B'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: 50%;
-    transition-property: left, top, transform;
-    transition-duration: 250ms, 250ms, 100ms;
-    transform: scale(1);
 
+    &[data-cell-value="2"] {
+        background: $tile-color-2;
+    }
+
+    &[data-cell-value="4"] {
+        background: $tile-color-4;
+    }
+
+    &[data-cell-value="8"] {
+        background: $tile-color-8;
+    }
+
+    &[data-cell-value="16"] {
+        background: $tile-color-16;
+    }
+
+    &[data-cell-value="32"] {
+        background: $tile-color-32;
+    }
+
+    &[data-cell-value="64"] {
+        background: $tile-color-64;
+    }
+
+    &[data-cell-value="128"] {
+        background: $tile-color-128;
+    }
+
+    &[data-cell-value="256"] {
+        background: $tile-color-256;
+    }
+
+    &[data-cell-value="512"] {
+        background: $tile-color-512;
+    }
+
+    &[data-cell-value="1024"] {
+        background: $tile-color-1024;
+    }
+
+    &[data-cell-value="2048"] {
+        background: $tile-color-2048;
+    }
 }

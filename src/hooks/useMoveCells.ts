@@ -1,4 +1,4 @@
-import { Dispatch, useCallback, useEffect } from "react";
+import { Dispatch, useCallback, useEffect, useState } from "react";
 import { CellData, GridAxis, MovingCellData } from "../types.global";
 import { mergeCellsArrays } from "../utils/mergeCellsArrays";
 
@@ -7,6 +7,9 @@ export const useMoveCells = (
     setGameCells: Dispatch<React.SetStateAction<CellData[]>>,
     setIsMoveDone: Dispatch<React.SetStateAction<boolean>>
 ): void => {
+    const [isKeyPressed, setIsKeyPressed] = useState(false);
+
+    // Function to store cells with the same moving axis value in vectors
     const getCellsFromAxis = useCallback((axis: GridAxis): { [key: number]: MovingCellData[] } => {
         const cellsFromAxis: { [key: number]: MovingCellData[] } = {};
 
@@ -28,8 +31,7 @@ export const useMoveCells = (
     const moveCells = useCallback((axis: GridAxis, reverse: boolean): void => {
         let isMoveDone = false;
         const cellsFromAxis = getCellsFromAxis(axis);
-
-        for (let [axisValue, cellsVector] of Object.entries(cellsFromAxis)) {
+        for (let cellsVector of Object.values(cellsFromAxis)) {
             if (reverse) {
                 cellsVector.reverse();
             }
@@ -55,19 +57,23 @@ export const useMoveCells = (
                         continue;
                     }
 
-                    if (cellsVector[j].value === cellsVector[j + 1].value) {
+                    if (cellsVector[j].value === cellsVector[j + 1].value && !cellsVector[j + 1].new) {
                         cellsVector[j].value *= 2;
-                        cellsVector[j].new = true;
+                        cellsVector[j].new = true; // Additional field to mark whether a cell has been summed with another cell and can no longer be summed during this move
                         cellsVector[j + 1].value = 0;
 
-                        isMoveDone = true;
+                        isMoveDone = true; // Flag to observe whether we should request new filled cells (if any move has been made)
                     }
                 }
             }
+
+            for (let i = 0; i < cellsVector.length; i += 1) {
+                cellsVector[i].new = false;
+            }
         }
 
-        applyGameCellsChanges([...Object.values(cellsFromAxis)].flat());
         if (isMoveDone) {
+            applyGameCellsChanges([...Object.values(cellsFromAxis)].flat());
             setIsMoveDone(prevState => !prevState);
         }
     }, [getCellsFromAxis, setIsMoveDone]);
@@ -75,9 +81,11 @@ export const useMoveCells = (
     const handleKeydown = useCallback((event: KeyboardEvent) => {
         event.preventDefault();
 
-        if (!['q', 'a', 'w', 's', 'e', 'd'].includes(event.key)) {
+        if (!['q', 'a', 'w', 's', 'e', 'd'].includes(event.key) || isKeyPressed) {
             return;
         }
+
+        setIsKeyPressed(true);
 
         switch(event.key) {
             case 'q':
@@ -99,11 +107,24 @@ export const useMoveCells = (
                 moveCells('y', false);
                 break;
         }
-    }, [moveCells]);
+    }, [moveCells, isKeyPressed]);
+
+    // Additional keyup handler is needed to prevent 'race condition' bug, when the user presses too many keys too quickly
+    const handleKeyup = useCallback((event: KeyboardEvent) => {
+        if (!['q', 'a', 'w', 's', 'e', 'd'].includes(event.key)) {
+            return;
+        }
+
+        setIsKeyPressed(false);
+    }, [setIsKeyPressed]);
 
     useEffect(() => {
         document.addEventListener('keydown', handleKeydown);
+        document.addEventListener('keyup', handleKeyup);
 
-        return () => document.removeEventListener('keydown', handleKeydown);
-    }, [handleKeydown]);
+        return () => {
+            document.removeEventListener('keydown', handleKeydown);
+            document.removeEventListener('keyup', handleKeyup);
+        }
+    }, [handleKeydown, handleKeyup]);
 }

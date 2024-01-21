@@ -3,3 +3,13 @@
     height: 550px;
     position: relative;
 }
+
+.game-status-container {
+    margin-top: 30px;
+    text-align: center;
+
+    &__status {
+        font-weight: 700;
+        font-size: 1.5rem;
+    }
+}
