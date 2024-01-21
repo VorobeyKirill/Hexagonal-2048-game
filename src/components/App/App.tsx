@@ -18,7 +18,11 @@ export const App: React.FC = () => {
     <>
       {
         isGameValid ?
-        <Board />
+        <Board
+          radius={Number(searchParams.get('radius'))}
+          hostname={searchParams.get('hostname') as string}
+          port={searchParams.get('port') as string}
+        />
         :
         <GameSettings setSearchParams={setSearchParams} />
       }

@@ -21,25 +21,14 @@ export const GameSettings: FC<GameSettingsProps> = ({ setSearchParams }) => {
         });
     }
 
-    const handlePortExamplesClick = (event: MouseEvent): void => {
+    const handleExamplesClick = (event: MouseEvent, settingName: 'port' | 'hostname'): void => {
         if ((event.target as HTMLElement).className !== 'examples__option') {
             return;
         }
 
         setSettings({
             ...settings,
-            port: (event.target as HTMLElement).textContent || settings.port
-        });
-    }
-
-    const handleHostnameExamplesClick = (event: MouseEvent): void => {
-        if ((event.target as HTMLElement).className !== 'examples__option') {
-            return;
-        }
-
-        setSettings({
-            ...settings,
-            hostname: (event.target as HTMLElement).textContent || settings.hostname
+            [settingName]: (event.target as HTMLElement).textContent || settings[settingName]
         });
     }
 
@@ -55,7 +44,7 @@ export const GameSettings: FC<GameSettingsProps> = ({ setSearchParams }) => {
             <form className="settings-form" onSubmit={handleFormSubmit}>
                 <label className="settings-form__label" htmlFor="port">Port</label>
                 <input className="settings-form__input--text" type="text" id="port" value={settings.port} onChange={handleInputChange} />
-                <span className="settings-form-examples" onClick={handlePortExamplesClick}>
+                <span className="settings-form-examples" onClick={(e) => handleExamplesClick(e, "port")}>
                     Example:&nbsp;
                     <span className="examples__option">{PORT.DEFAULT}</span>
                     ,&nbsp;
@@ -64,7 +53,7 @@ export const GameSettings: FC<GameSettingsProps> = ({ setSearchParams }) => {
 
                 <label className="settings-form__label" htmlFor="hostname">Hostname</label>
                 <input className="settings-form__input--text" type="text" id="hostname" value={settings.hostname} onChange={handleInputChange} />
-                <span className="settings-form-examples" onClick={handleHostnameExamplesClick}>
+                <span className="settings-form-examples" onClick={(e) => handleExamplesClick(e, "hostname")}>
                     Example:&nbsp;
                     <span className="examples__option">{RNG_HOSTNAME.RNG_SERVER}</span>
                     ,&nbsp;
