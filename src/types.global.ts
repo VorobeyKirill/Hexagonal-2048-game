@@ -16,3 +16,7 @@ export interface CellData extends CellCoordinates {
 export interface MovingCellData extends CellData {
     new?: boolean;
 }
+
+export type GridAxis = 'z' | 'x' | 'y';
+
+export type GameStatus = 'playing' | 'game-over';

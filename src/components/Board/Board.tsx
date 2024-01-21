@@ -2,18 +2,21 @@ import { FC, useEffect, useState } from "react";
 import { BoardProps } from "./Board.types";
 import { useBoardGrid } from "../../hooks/useBoardGrid";
 import { Cell } from "../Cell/Cell";
-import { CellData } from "../../types.global";
+import { CellData, GameStatus } from "../../types.global";
 import { BOARD_WIDTH } from "../../constants";
 
-import "./Board.scss";
 import { mergeCellsArrays } from "../../utils/mergeCellsArrays";
 import { useMoveCells } from "../../hooks/useMoveCells";
+import { useGameStatus } from "../../hooks/useGameStatus";
+
+import "./Board.scss";
 
 export const Board: FC<BoardProps> = ({ radius, hostname, port }) => {
     // Hook for all methods related to the coordinates of cells in the grid and their size
     const { getGridCellsCoords, getGridCellSize } = useBoardGrid(radius);
 
     const [isMoveDone, setIsMoveDone] = useState(false);
+    const [gameStatus, setGameStatus] = useState<GameStatus>('playing');
 
     // Setting all cells with their coordinates and zero value by default
     const [gameCells, setGameCells] = useState<CellData[]>(() => {
@@ -25,6 +28,9 @@ export const Board: FC<BoardProps> = ({ radius, hostname, port }) => {
         ));
     });
 
+    useGameStatus(gameCells, setGameStatus);
+
+    // Hook for handling keyboard events and moving values in cells
     useMoveCells(gameCells, setGameCells, setIsMoveDone);
 
     // useEffect to request new random filled cells from the server
@@ -46,14 +52,23 @@ export const Board: FC<BoardProps> = ({ radius, hostname, port }) => {
     }, [hostname, port, radius, isMoveDone]);
 
 
-    return <div className="board" style={{width: `${BOARD_WIDTH}px`}}>
-        {gameCells.map(cell => (
-            <Cell
-                key={`${cell.x}${cell.y}${cell.z}`}
-                cellData={{x: cell.x, y: cell.y, z: cell.z, value: cell.value}}
-                size={getGridCellSize()}
-                boardRadius={radius}
-            />
-        ))}
-    </div>;
+    return (
+        <>
+            <div className="board" style={{width: `${BOARD_WIDTH}px`}}>
+                {gameCells.map(cell => (
+                    <Cell
+                        key={`${cell.x}${cell.y}${cell.z}`}
+                        cellData={{x: cell.x, y: cell.y, z: cell.z, value: cell.value}}
+                        size={getGridCellSize()}
+                        boardRadius={radius}
+                    />
+                ))}
+
+            </div>
+            <p className="">
+                Game Status:&nbsp;
+                <span data-status={gameStatus}>{gameStatus}</span>
+            </p>
+        </>
+    );
 }

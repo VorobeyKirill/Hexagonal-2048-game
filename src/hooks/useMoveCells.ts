@@ -1,5 +1,5 @@
 import { Dispatch, useCallback, useEffect } from "react";
-import { CellData, MovingCellData } from "../types.global";
+import { CellData, GridAxis, MovingCellData } from "../types.global";
 import { mergeCellsArrays } from "../utils/mergeCellsArrays";
 
 export const useMoveCells = (
@@ -7,7 +7,7 @@ export const useMoveCells = (
     setGameCells: Dispatch<React.SetStateAction<CellData[]>>,
     setIsMoveDone: Dispatch<React.SetStateAction<boolean>>
 ): void => {
-    const getCellsFromAxis = useCallback((axis: 'z' | 'x' | 'y'): { [key: number]: MovingCellData[] } => {
+    const getCellsFromAxis = useCallback((axis: GridAxis): { [key: number]: MovingCellData[] } => {
         const cellsFromAxis: { [key: number]: MovingCellData[] } = {};
 
         gameCells.forEach(cell => {
@@ -25,9 +25,10 @@ export const useMoveCells = (
         setGameCells(mergeCellsArrays(gameCells, newCells));
     }, [setGameCells]);
 
-    const moveCells = useCallback((axis: 'z' | 'x' | 'y', reverse: boolean): void => {
+    const moveCells = useCallback((axis: GridAxis, reverse: boolean): void => {
         let isMoveDone = false;
         const cellsFromAxis = getCellsFromAxis(axis);
+
         for (let [axisValue, cellsVector] of Object.entries(cellsFromAxis)) {
             if (reverse) {
                 cellsVector.reverse();
@@ -69,7 +70,7 @@ export const useMoveCells = (
         if (isMoveDone) {
             setIsMoveDone(prevState => !prevState);
         }
-    }, [getCellsFromAxis]);
+    }, [getCellsFromAxis, setIsMoveDone]);
 
     const handleKeydown = useCallback((event: KeyboardEvent) => {
         event.preventDefault();
