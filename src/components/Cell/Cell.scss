@@ -13,12 +13,15 @@
     background: $tile-color-0;
     clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
 
-    font-size: 1.7rem;
-    font-weight: 700;
+    font-weight: 400;
 
     display: flex;
     justify-content: center;
     align-items: center;
+
+    transition-property: left, top, transform;
+    transition-duration: 250ms, 250ms, 100ms;
+    transform: scale(1);
 
     &[data-cell-value="2"] {
         background: $tile-color-2;

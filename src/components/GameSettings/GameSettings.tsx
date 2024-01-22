@@ -41,7 +41,7 @@ export const GameSettings: FC<GameSettingsProps> = ({ setSearchParams }) => {
 
     return (
         <div className="settings-container">
-            <form className="settings-form" onSubmit={handleFormSubmit}>
+            <form className="settings-form" onSubmit={handleFormSubmit} data-testid="settings-form">
                 <label className="settings-form__label" htmlFor="port">Port</label>
                 <input className="settings-form__input--text" type="text" id="port" value={settings.port} onChange={handleInputChange} />
                 <span className="settings-form-examples" onClick={(e) => handleExamplesClick(e, "port")}>

@@ -46,7 +46,7 @@ export const useMoveCells = (
                         continue;
                     }
 
-                    if (cellsVector[j].value === 0) {
+                    if (cellsVector[j].value === 0 && cellsVector[j + 1].value !== 0) {
                         const temp = cellsVector[j + 1].value;
                         cellsVector[j + 1].value = 0;
                         cellsVector[j + 1].new = false;

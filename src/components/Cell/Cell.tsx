@@ -3,17 +3,7 @@ import { CELL_BORDER_WIDTH } from "../../constants";
 
 import "./Cell.scss";
 import { useScale } from "../../hooks/useScale";
-
-interface CellProps {
-    cellData: {
-        x: number;
-        y: number;
-        z: number;
-        value: number;
-    },
-    size: number;
-    boardRadius: number;
-}
+import { CellProps } from "./Cell.types";
 
 export const Cell: FC<CellProps> = ({ cellData, size, boardRadius }) => {
     const {x, y, z, value } = cellData;
@@ -39,14 +29,16 @@ export const Cell: FC<CellProps> = ({ cellData, size, boardRadius }) => {
             data-y={y}
             data-z={z}
             data-value={value}
+            data-testid="cell"
         >
             <div
                 className="cell__tile"
+                data-testid="cell-tile"
                 style={{
-                    width: `${cellWidth - CELL_BORDER_WIDTH * 4}px`,
-                    height: `${cellHeight - CELL_BORDER_WIDTH * 4}px`,
-                    top: `${CELL_BORDER_WIDTH * 2}px`,
-                    left: `${CELL_BORDER_WIDTH * 2}px`,
+                    width: `${cellWidth - CELL_BORDER_WIDTH * 4 + boardRadius}px`,
+                    height: `${cellHeight - CELL_BORDER_WIDTH * 4 + boardRadius}px`,
+                    top: `${CELL_BORDER_WIDTH * 2 - boardRadius / 2}px`,
+                    left: `${CELL_BORDER_WIDTH * 2 - boardRadius / 2}px`,
                     transform: `scale(${scaleValue})`
                 }}
                 data-cell-value={value}

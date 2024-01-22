@@ -53,5 +53,8 @@
   "engines": {
     "node": ">=15.5.1",
     "npm": ">=7.3.0"
+  },
+  "devDependencies": {
+    "jest-watch-typeahead": "^0.6.5"
   }
 }

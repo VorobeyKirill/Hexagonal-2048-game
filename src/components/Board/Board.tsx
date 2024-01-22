@@ -51,7 +51,6 @@ export const Board: FC<BoardProps> = ({ radius, hostname, port }) => {
         requestNewFilledCells();
     }, [hostname, port, radius, isMoveDone]);
 
-
     return (
         <>
             <div className="board" style={{width: `${BOARD_WIDTH}px`}}>
@@ -63,7 +62,6 @@ export const Board: FC<BoardProps> = ({ radius, hostname, port }) => {
                         boardRadius={radius}
                     />
                 ))}
-
             </div>
             <p className="game-status-container">
                 Game Status:&nbsp;
