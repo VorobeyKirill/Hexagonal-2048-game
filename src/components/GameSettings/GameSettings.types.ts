@@ -6,10 +6,10 @@ export interface GameSettingsProps {
 
 export enum RNG_HOSTNAME {
     LOCALHOST = "localhost",
-    RNG_SERVER = "hex2048-lambda.octa.wtf"
+    RNG_SERVER = "hex2048-lambda.octa.wtf",
 }
 
 export enum PORT {
     LOCALHOST = "13337",
-    DEFAULT = "80"
+    DEFAULT = "80",
 }

@@ -1,8 +1,8 @@
-import { CellData } from '../../types.global';
-import { mergeCellsArrays } from '../mergeCellsArrays';
+import { CellData } from "../../types.global";
+import { mergeCellsArrays } from "../mergeCellsArrays";
 
-describe('mergeCellsArrays', () => {
-  test('should merge cells arrays correctly', () => {
+describe("mergeCellsArrays", () => {
+  test("should merge cells arrays correctly", () => {
     const baseCellsArray = [
       { x: 0, y: 0, z: 0, value: 2 },
       { x: 1, y: -1, z: 0, value: 0 },
@@ -23,7 +23,7 @@ describe('mergeCellsArrays', () => {
     ]);
   });
 
-  test('should return the base array if new array is empty', () => {
+  test("should return the base array if new array is empty", () => {
     const baseCellsArray = [
       { x: 0, y: 0, z: 0, value: 2 },
       { x: 1, y: -1, z: 0, value: 0 },
@@ -37,7 +37,7 @@ describe('mergeCellsArrays', () => {
     expect(mergedArray).toEqual(baseCellsArray);
   });
 
-  test('should handle empty base array correctly', () => {
+  test("should handle empty base array correctly", () => {
     const baseCellsArray: CellData[] = [];
 
     const newCellsArray = [

@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { CELL_BORDER_WIDTH } from "../../constants";
-
-import "./Cell.scss";
 import { useScale } from "../../hooks/useScale";
 import { CellProps } from "./Cell.types";
+
+import "./Cell.scss";
 
 export const Cell: FC<CellProps> = ({ cellData, size, boardRadius }) => {
     const {x, y, z, value } = cellData;
@@ -14,7 +14,7 @@ export const Cell: FC<CellProps> = ({ cellData, size, boardRadius }) => {
     const cellHeight = size * Math.sqrt(3);
 
     const leftOffset = size * 1.5 * x + Math.sqrt(3) * (boardRadius - 1) * cellHeight / 2 - CELL_BORDER_WIDTH * x;
-    const topOffset = -cellHeight / 2 * (1 + x + 2 * y) + CELL_BORDER_WIDTH * y + CELL_BORDER_WIDTH * x / Math.sqrt(3) + boardRadius * cellHeight * 1.5 / Math.sqrt(3);
+    const topOffset = -cellHeight / 2 * (1 + x + 2 * y) + CELL_BORDER_WIDTH * (y +  x / Math.sqrt(3)) + boardRadius * cellHeight * 1.5 / Math.sqrt(3);
 
     return (
         <div

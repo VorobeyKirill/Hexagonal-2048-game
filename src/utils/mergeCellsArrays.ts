@@ -16,7 +16,7 @@ export const mergeCellsArrays = (baseCellsArray: CellData[], newCellsArray: Cell
 
         return {
             ...cell,
-            value: cellToMerge.value
+            value: cellToMerge.value,
         }
     });
 

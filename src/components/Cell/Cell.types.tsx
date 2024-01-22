@@ -1,10 +1,7 @@
+import { CellData } from "../../types.global";
+
 export interface CellProps {
-    cellData: {
-        x: number;
-        y: number;
-        z: number;
-        value: number;
-    },
+    cellData: CellData;
     size: number;
     boardRadius: number;
 }

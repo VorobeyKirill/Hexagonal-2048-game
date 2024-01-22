@@ -11,7 +11,7 @@ export const App: React.FC = () => {
     const gameBoardRadius = Number(searchParams.get('radius'));
     const isGameBoardRadiusValid = gameBoardRadius >= BOARD_RADIUS.MIN && gameBoardRadius <= BOARD_RADIUS.MAX;
 
-    return searchParams.get('hostname') && isGameBoardRadiusValid
+    return searchParams.get('hostname') && isGameBoardRadiusValid;
   }, [searchParams])
 
   return (

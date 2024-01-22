@@ -68,9 +68,7 @@ describe("useMoveCells", () => {
     );
 
     fireEvent.keyDown(document, { key: "q" });
-
     fireEvent.keyUp(document, { key: "q" });
-
     fireEvent.keyDown(document, { key: "e" });
 
     expect(mockSetGameCells).toHaveBeenCalledTimes(2);

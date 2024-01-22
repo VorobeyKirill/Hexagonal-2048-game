@@ -1,13 +1,12 @@
 import { FC, useEffect, useState } from "react";
 import { BoardProps } from "./Board.types";
-import { useBoardGrid } from "../../hooks/useBoardGrid";
 import { Cell } from "../Cell/Cell";
 import { CellData, GameStatus } from "../../types.global";
 import { BOARD_WIDTH } from "../../constants";
-
 import { mergeCellsArrays } from "../../utils/mergeCellsArrays";
 import { useMoveCells } from "../../hooks/useMoveCells";
 import { useGameStatus } from "../../hooks/useGameStatus";
+import { useBoardGrid } from "../../hooks/useBoardGrid";
 
 import "./Board.scss";
 
@@ -15,6 +14,7 @@ export const Board: FC<BoardProps> = ({ radius, hostname, port }) => {
     // Hook for all methods related to the coordinates of cells in the grid and their size
     const { getGridCellsCoords, getGridCellSize } = useBoardGrid(radius);
 
+    // Flag to observe whether we should request new filled cells (if any move has been made)
     const [isMoveDone, setIsMoveDone] = useState(false);
     const [gameStatus, setGameStatus] = useState<GameStatus>('playing');
 
@@ -28,6 +28,7 @@ export const Board: FC<BoardProps> = ({ radius, hostname, port }) => {
         ));
     });
 
+    // Hook for checking gameStatus after each move (gameCells array change)
     useGameStatus(gameCells, setGameStatus);
 
     // Hook for handling keyboard events and moving values in cells
@@ -40,7 +41,10 @@ export const Board: FC<BoardProps> = ({ radius, hostname, port }) => {
 
             const response = await fetch(`http://${hostname}:${port}/${radius}`, {
                 method: 'POST',
-                body: JSON.stringify(filledCells)
+                body: JSON.stringify(filledCells),
+                headers: {
+                    'Content-Type': 'application/json',
+                }
             });
 
             const newFilledCells =  await response.json();

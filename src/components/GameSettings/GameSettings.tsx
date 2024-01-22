@@ -28,7 +28,7 @@ export const GameSettings: FC<GameSettingsProps> = ({ setSearchParams }) => {
 
         setSettings({
             ...settings,
-            [settingName]: (event.target as HTMLElement).textContent || settings[settingName]
+            [settingName]: (event.target as HTMLElement).textContent || settings[settingName],
         });
     }
 
