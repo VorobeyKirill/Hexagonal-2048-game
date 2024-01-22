@@ -6,7 +6,7 @@ import "./GameSettings.scss";
 
 export const GameSettings: FC<GameSettingsProps> = ({ setSearchParams }) => {
     const [settings, setSettings] = useState({
-        port: PORT.DEFAULT as string,
+        port: PORT.DEFAULT,
         hostname: RNG_HOSTNAME.RNG_SERVER as string,
         radius: BOARD_RADIUS.MIN
     });
@@ -46,7 +46,7 @@ export const GameSettings: FC<GameSettingsProps> = ({ setSearchParams }) => {
                 <input className="settings-form__input--text" type="text" id="port" value={settings.port} onChange={handleInputChange} />
                 <span className="settings-form-examples" onClick={(e) => handleExamplesClick(e, "port")}>
                     Example:&nbsp;
-                    <span className="examples__option">{PORT.DEFAULT}</span>
+                    <span className="examples__option">{PORT.HTTP}</span>
                     ,&nbsp;
                     <span className="examples__option">{PORT.LOCALHOST}</span>
                 </span>

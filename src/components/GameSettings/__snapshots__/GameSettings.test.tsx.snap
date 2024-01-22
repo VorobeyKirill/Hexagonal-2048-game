@@ -22,7 +22,7 @@ Object {
             class="settings-form__input--text"
             id="port"
             type="text"
-            value="80"
+            value=""
           />
           <span
             class="settings-form-examples"
@@ -111,7 +111,7 @@ Object {
           class="settings-form__input--text"
           id="port"
           type="text"
-          value="80"
+          value=""
         />
         <span
           class="settings-form-examples"

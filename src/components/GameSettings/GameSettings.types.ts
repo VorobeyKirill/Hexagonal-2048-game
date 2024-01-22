@@ -11,5 +11,6 @@ export enum RNG_HOSTNAME {
 
 export enum PORT {
     LOCALHOST = "13337",
-    DEFAULT = "80",
+    HTTP = "80",
+    DEFAULT = ""
 }
