@@ -21,7 +21,7 @@ export const App: React.FC = () => {
         <Board
           radius={Number(searchParams.get('radius'))}
           hostname={searchParams.get('hostname') as string}
-          port={searchParams.get('port') as string}
+          port={searchParams.get('port') || ''}
         />
         :
         <GameSettings setSearchParams={setSearchParams} />

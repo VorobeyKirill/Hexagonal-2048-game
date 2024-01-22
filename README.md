@@ -1,5 +1,7 @@
 # Hexagonal 2048
 
+Deployed Application - https://kirv-hex2048.surge.sh
+
 ## Task description
 
 Your task is to develop a game [2048](https://play2048.co/) on a hexagonal field.
@@ -29,15 +31,15 @@ More info:
 
 ### Game initialization
 
-When the game starts on any game level, the user should not interact with UI. 
+When the game starts on any game level, the user should not interact with UI.
 That means when you choose the game level or the game is loaded, the game should be initialized on its own by default,
 and the user has to see the beginning numbers to start playing.
 
-The same rule is applicable when the game is loaded by the URL for [tests purposes](#how-will-your-solution-be-tested). 
-When the game is loaded using URL parameters, then the first request has to be done immediately after loading without any additional actions. 
+The same rule is applicable when the game is loaded by the URL for [tests purposes](#how-will-your-solution-be-tested).
+When the game is loaded using URL parameters, then the first request has to be done immediately after loading without any additional actions.
 And as a result, you will be able to see the beginning numbers to start playing.
 
-In other words, before starting playing the user should already see some beginning numbers received from the server without any actions. 
+In other words, before starting playing the user should already see some beginning numbers received from the server without any actions.
 The first request to the server has to be done automatically after starting the game.
 
 ### Directions and Keys
@@ -73,8 +75,8 @@ appropriate hexagonal direction.
 
 After each shift, you need to place new numbers received from the [server](#rng-server).
 
-In case if after starting shifting there are no movements done in the chosen direction and there are possible movements at least in one direction ([game status](#game-status) is `playing`). 
-Nothing should be done until shifting is completed - do not need to add new numbers. 
+In case if after starting shifting there are no movements done in the chosen direction and there are possible movements at least in one direction ([game status](#game-status) is `playing`).
+Nothing should be done until shifting is completed - do not need to add new numbers.
 The game has to wait for changes in any direction if they are possible and has not been done during shifting.
 
 ### Game status
@@ -85,7 +87,7 @@ Possible game statuses:
 - `playing` - there are possible moves that can be done.
 - `game-over` - there are no more possible moves.
 
-Game status should be present somewhere in your game DOM element (any one DOM element at the any place of DOM) as a data attribute `data-status`. 
+Game status should be present somewhere in your game DOM element (any one DOM element at the any place of DOM) as a data attribute `data-status`.
 
 Example:
 ```html
@@ -123,7 +125,7 @@ The servers send an empty array in case of no more positions to add new numbers.
 ![cube coordinates system](./assets/cube-coordinates.svg)
 
 The server expects you to send the radius (game level) in the URL pathname
-(e.g., `/2` for 2, `/3` for 3, etc.). 
+(e.g., `/2` for 2, `/3` for 3, etc.).
 For example, correct server URL for game radius 2 is `//hex2048-lambda.octa.wtf/2`.
 
 Server URL: `hex2048-lambda.octa.wtf` (works with both HTTP and HTTPS).
@@ -170,7 +172,7 @@ Server response:
 
 ### Receiving data from the local server
 
-To start the server locally you should install dependencies and run a test server. 
+To start the server locally you should install dependencies and run a test server.
 
 Steps to help:
 ```
@@ -256,12 +258,12 @@ For extra credits, you should the following (one or more):
 
 ## Implementation details
 
-You can use TypeScript or JavaScript this decision is up to you. 
+You can use TypeScript or JavaScript this decision is up to you.
 If you want to use JavaScript, you should use `.jsx` extension, and `.tsx` extension for TypeScript.
 
 If you don't like React, you can remove `ReactDOM.render` from `src/index.tsx` and implement your game with plain JavaScript/TypeScript.
 
-We use `Create-React-App` template which brings a number of limitations in the choice of other technologies, 
+We use `Create-React-App` template which brings a number of limitations in the choice of other technologies,
 but if you want and are able to use another library, we won't mind.
 
 ## Package scripts description
@@ -275,10 +277,10 @@ but if you want and are able to use another library, we won't mind.
 
 ## Tests requirements
 
-The [tests/\*](tests/) files should not be modified. 
+The [tests/\*](tests/) files should not be modified.
 If you would like to add your own unit tests, you can add these in a separate file in the `src` folder.
 
-The `package.json` file should only be modified in order to add any third-party dependencies required for your solution. 
+The `package.json` file should only be modified in order to add any third-party dependencies required for your solution.
 The jest and babel versions should not be changed.
 
 Your solution must use/be compatible with Node.js version **15.5.1**.
@@ -287,7 +289,7 @@ Your solution must use/be compatible with Node.js version **15.5.1**.
 
 *Note: The tests were written using [puppeteer](https://github.com/puppeteer/puppeteer) library. (We haven't used cypress in tests)*
 
-Run `npm install` to install all dependencies and then run `npm run test` to run tests. 
+Run `npm install` to install all dependencies and then run `npm run test` to run tests.
 These should all pass if your solution has been implemented correctly.
 
 Good luck!

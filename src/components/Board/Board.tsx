@@ -39,7 +39,7 @@ export const Board: FC<BoardProps> = ({ radius, hostname, port }) => {
         const requestNewFilledCells = async () => {
             const filledCells = gameCells.filter(cell => cell.value !== 0);
 
-            const response = await fetch(`http://${hostname}:${port}/${radius}`, {
+            const response = await fetch(`${window.location.protocol}//${hostname}:${port}/${radius}`, {
                 method: 'POST',
                 body: JSON.stringify(filledCells),
                 headers: {
